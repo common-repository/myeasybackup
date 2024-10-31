@@ -1,0 +1,1109 @@
+<?php
+/**
+ *	Restore a myEASYbackup data set
+ *	@version 0.0.8
+ *
+ *	Changelog:
+ *
+ *	0.0.2	added a new query to replace links in the guid field (posts)
+ *	0.0.3	now showing the number of changed rows
+ *	0.0.4	added the ability to restore using PHP code rather than system() commands
+ *			now changing paths in the `option_value` field (`options` table) only if the path is changed
+ *			added a notice on the number of records updated by the queries replacing values in the tables
+ *			added some additional classes in the style header
+ *			added the ability to remove also the .zip file (only the one selected in the 'Backups available on this server in the following folder' section)
+ *			when the restore is completed successfully the data set ini file is automatically removed
+ *	0.0.5	fixed a security issue with the .ini file
+ *	0.0.6	fixed a possible issue arising when open_basedir is enabled
+ *	0.0.7	added the ability to unzip a password protected backup
+ *	0.0.8	added the ability to unzip using tar (.tgz files)
+ *	0.0.9	images are taken from a CDN: this was done to avoid having to upload them at the root of the server (where this file is uploaded)
+ *	0.1.0	images are now embedded within the page - see http://srht.me/hp
+ *
+ */
+
+$MER_VERSION = '0.1.0';
+//define('MYEASY_CDN', 'http://srht.me/f9');  // 0.0.9 added; 0.1.0 removed
+
+?>
+<html>
+<head>
+	<title>myEASYrestore | <?php echo _( 'Data Set Restore Tool' ); ?></title>
+	<meta http-equiv="resource-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex,nofollow" />
+	<link rel="shortcut icon" type="image/x-icon" href="data:image/gif;base64,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" />
+	<style type="text/css" media="all">
+		body { color:#444;background-color:#eaeaea;font-family:"Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;margin:0;padding:0; }
+		table { color:#444; }
+		table,code { font-size:16px; }	/* 0.0.4 */
+		input, span.http { font-size:18px;font-family:monospace; }
+		h3 { font:italic 36px/36px Georgia,"Times New Roman","Bitstream Charter",Times,serif;color:#444;text-shadow:0 1px 0 #999; }
+		span.small { font-size:smaller; }
+		pre { font-size:smaller; }
+		span.error { color:red;font-weight:bold; }
+		span.ok { color:green;font-weight:bold; }
+		div.wrapper { color:#444;background-color:#eaeaea;padding:12px; }
+		div.info, div.error, div.exec {
+			background-color:#FFD68F;border:1px solid #F09900;padding:12px;-moz-border-radius:5px;border-radius:5px;
+			font:italic 22px/26px Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+			color:#444;text-shadow:0 1px 0 #DFBB7D;
+		}
+		div.error { font-weight:bold;margin:12px 0;background:#F3A300;width:50%; }
+		div.exec { font-weight:bold;margin:12px 0;background:#CFCFCF;width:auto; }
+		div.domains {
+			color:#eaeaea;background-color:#6F6F6F;border:1px solid #9F9F9F;padding:12px;-moz-border-radius:5px;border-radius:5px;
+			margin:8px 0;
+		}
+	</style>
+</head>
+<body>
+<div class="wrapper" align="center">
+	<a href="http://myeasywp.com" target="_blank"><img alt="myEASYwp logo" width="240px" height="48px" border="0" src="data:image/png;base64,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" /></a>
+
+	<h3>myEASYrestore | <?php echo _( 'Data Set Restore Tool' ); ?></h3>
+	<p style="font-style:italic;"><?php echo _( 'The myEASYbackup companion to let you restore and/or migrate your data with a couple of clicks!' ); ?></p>
+
+	<form name="myeasyrestore" id="myeasyrestore" method="post" action="">
+	<input type="hidden" name="_action" value="" />
+<?php
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+define('INSTALL_PATH', dirname(__FILE__));
+//define('INSTALL_PATH', dirname(__FILE__) .'/restore-test');		#	debug only!
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+@set_time_limit(0);
+
+#
+#	http://manpages.ubuntu.com/manpages/hardy/man1/unzip.1.html
+#
+$err_unzip = array();
+$err_unzip[0] = _('normal; no errors or warnings detected.');
+$err_unzip[1] = _('one or more warning errors were encountered, but processing completed successfully anyway. This includes zipfiles where one or more files was skipped due to unsupported compression method or encryption with an unknown password.');
+$err_unzip[2] = _('a generic error in the zipfile format was detected. Processing may have completed successfully anyway; some broken zipfiles created by other archivers have simple work-arounds.');
+$err_unzip[3] = _('a severe error in the zipfile format was detected. Processing probably failed immediately.');
+$err_unzip[4] = _('unzip was unable to allocate memory for one or more buffers during program initialization.');
+$err_unzip[5] = _('unzip was unable to allocate memory or unable to obtain a tty to read the decryption password(s).');
+$err_unzip[6] = _('unzip was unable to allocate memory during decompression to disk.');
+$err_unzip[7] = _('unzip was unable to allocate memory during in-memory decompression.');
+$err_unzip[8] = _('[currently not used]');
+$err_unzip[9] = _('the specified zipfiles were not found.');
+$err_unzip[10] = _('invalid options were specified on the command line.');
+$err_unzip[11] = _('no matching files were found.');
+$err_unzip[50] = _('the disk is (or was) full during extraction or missing writing permission.');		#	or missing writing permission
+$err_unzip[51] = _('the end of the ZIP archive was encountered prematurely.');
+$err_unzip[80] = _('the user aborted unzip prematurely with control-C (or similar)');
+$err_unzip[81] = _('testing or extraction of one or more files failed due to unsupported compression methods or unsupported decryption.');
+$err_unzip[82] = _('no files were found due to bad decryption password(s). (If even one file is successfully processed, however, the exit status is 1.)');
+
+
+//if(file_exists(INSTALL_PATH . '/myEASYrestore.ini'))					#	0.0.4
+if(file_exists(INSTALL_PATH . '/myEASYrestore_ini.php'))				#	0.0.5
+{
+	#	should I force MySQL restore with PHP code?
+	#
+	$config = parse_ini_file(INSTALL_PATH . '/myEASYrestore_ini.php', true);	#	0.0.5
+	$src_use_PHP_code = $config['options']['Use_PHP_code'];
+}
+
+
+if(isset($_POST['usePHP']) && $_POST['usePHP']==1)					#	0.0.4
+{
+	if(!class_exists(ZipArchive))
+	{
+		$_POST['_action'] = '';
+
+		echo '<div class="error">'
+
+				. '<p>'
+					.'<img alt="WARNING" align="absmiddle" src="data:image/png;base64,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" /> '
+					.'<span style="color:red;">' . _( 'Missing the ZipArchive class') . '</span>'
+					. _(': please check with your hosting provider if he can enable the ZipArchive class.')
+				. '</p>'
+
+				. '<p>' . _( 'Instructions about how to install the class are <a href="http://www.php.net/manual/en/zip.setup.php" target="_blank">available here</a>.') . '</p>'
+				. '<p>' . _( 'If you hosting provider refuses to install the class get the <a href="http://myeasywp.com/redirect/hosting.php" target="_blank">best available plans &amp; service here</a>.') . '</p>'
+
+			. '</div>'
+		;
+	}
+}
+
+
+if(isset($_POST['_action']) && $_POST['_action']=='UNZIP' && file_exists($_POST['filename']))
+{
+
+	echo '<div class="exec">'
+		._('Uncompressing data set...').'<br />';			#	0.0.4, 0.1.0
+
+//var_dump($_POST);
+//die();
+
+	chdir(INSTALL_PATH);
+	$result = 0; # 0.1.0
+
+	if(isset($_POST['usePHP']) && $_POST['usePHP']==1)			#	0.0.4
+	{
+		#	0.0.4
+		#
+		$zip = new ZipArchive;
+		$res = $zip->open($_POST['filename']);
+		if($res===true)
+		{
+			$zip->extractTo(INSTALL_PATH);
+			$zip->close();
+			$result = 0;
+		}
+		else
+		{
+			echo _( 'Error when decompressing the data file' ) . '<br />';
+			$result = 1;
+		}
+	}
+	else
+	{
+		echo '<textarea rows="20" style="width:650px;">';    # 0.1.0
+//		echo '<pre>'; # 0.1.0
+
+		if(substr($_POST['filename'],-4)=='.zip')
+		{
+				if($_POST['z_password']!='')					#	0.0.7
+				{
+					system( 'unzip '
+								. '-P ' . $_POST['z_password']
+								. ' ' . $_POST['filename'],
+								$result );
+				}
+				else
+				{
+					system( 'unzip '
+								. ' ' . $_POST['filename'],
+								$result );
+				}
+		}
+		else if(substr($_POST['filename'],-4)=='.tar' || substr($_POST['filename'],-4)=='.tgz')
+		{
+			#	0.0.8
+			#
+			system( 'tar -xvf '
+						. ' ' . $_POST['filename'],
+						$result );
+		}
+
+//		echo '</pre><br />'; # 0.1.0
+		echo '</textarea><br />'; # 0.1.0
+
+		if($result>0)
+		{
+			echo _( 'Error when decompressing the data file' ) . ' ('.$result.'):<br />'
+					.$err_unzip[$result]
+			;
+		}
+	}
+
+	if($result==0)						#	0.0.4
+	{
+		echo ' ' . _( 'Done!' );
+	}
+	echo '</div>';						#	0.0.4
+}
+
+
+if(isset($_POST['_action']) && $_POST['_action']=='RESTORE_TABLES' && file_exists($_POST['sql_filename']))
+{
+
+	echo '<div class="exec">'
+		._('Publishing tables...') . '<br />';		#	0.0.4
+
+//var_dump($_POST);
+//die();
+
+	define('DB_NAME',		$_POST['db_name']);
+	define('DB_USER',		$_POST['db_user']);
+	define('DB_PASSWORD',	$_POST['db_password']);
+	define('DB_HOST',		$_POST['db_host']);
+
+	$table_old_prefix	= $_POST['tb_old_prefix'];
+	$table_prefix		= $_POST['tb_prefix'];
+
+	$old_link			= $_POST['tb_old_value'];
+	$new_link			= $_POST['tb_new_value'];
+
+	$old_path			= $_POST['pth_old_value'];
+	$new_path			= $_POST['pth_new_value'];
+
+
+#
+#	0.0.4: BEG
+#-------------
+	$errors = false;
+
+	$dbh = @mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+
+	if($dbh=='') {
+		echo '<div class="error">'
+				. _( 'Impossible to connect to the MySQL server')
+				. ':<br />'
+				. _( 'MySQL Error' )
+				. ' ('.@mysql_errno().'): '.@mysql_error()
+		.'</div>';
+		$errors = true;
+	}
+
+	if($errors==false)
+	{
+		$dbs = @mysql_select_db(DB_NAME, $dbh);
+		if($dbs=='')
+		{
+			echo '<div class="error">'
+					. _( 'Impossible to connect to the database' )
+					. ':<br />'
+					. _( 'MySQL Error' )
+					. ' ('.@mysql_errno().'): '.@mysql_error()
+			.'</div>';
+			$errors = true;
+		}
+	}
+
+	if($errors==true)
+	{
+		echo '<div>'
+				.'<input type="button" style="cursor:pointer;" value="'
+					. _( 'Back' )
+					. '" onclick="javascript:window.location=\''.$_SERVER['PHP_SELF'].'\';" />'
+			.'</div>'
+		;
+		return;
+	}
+
+	$result = 0;
+
+	if($src_use_PHP_code==true)
+	{
+		#	if the MySQL database was saved by PHP code, we restore its contents using PHP code
+		#
+		$data = file_get_contents($_POST['sql_filename']);
+
+		//$tmp = explode("*/\n", $data);
+		$tmp = explode("/*[[EOR]]*/\n", $data);
+		$t = count($tmp);
+
+		for($i=0;$i<$t;$i++)
+		{
+			if(strpos($tmp[$i], '/*', 0)!==false)
+			{
+				#	comment
+			}
+			else
+			{
+				$query = $tmp[$i];
+
+				if($query!='')
+				{
+					$sth = mysql_query($query);
+
+					if(!$sth)
+					{
+						echo '<div class="error">'
+								. _( 'Error' ) . ' (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u><hr />'
+
+								. _('The full query creating the problem is') . ':<br /><code>' . htmlspecialchars($query) . '</code><br />'
+								. _('Note: emailing it to the developer will help him to fix the issue.')
+
+							. '</div>';
+					}
+					else
+					{
+						if(isset($_POST['c_verbose_sql']))
+						{
+							echo ''
+									. '<code style="font-size:10px;font-weight:normal;">' . htmlspecialchars($query) . '</code>'
+									. '<span class="ok">' . _(' done!') . '</span><br />'
+
+								. '';
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+#-------------
+#	0.0.4: END
+#
+
+		#	the MySQL database was saved by mysqldump, we restore its contents using mysql
+		#
+
+		//$tmpfile = tempnam( '/tmp', 'myEASYrestore_utility' );			#	0.0.6
+		$tmpfile = tempnam( MEBAK_BACKUP_PATH, 'myEASYrestore_utility' );	#	0.0.6
+
+		echo '<pre>';
+			system( 'mysql -u'.DB_USER.' -p'.DB_PASSWORD.' -h'.DB_HOST.' '.DB_NAME.' < '.$_POST['sql_filename'].' 1> '.$tmpfile.' 2>&1;',
+					   $result );
+		echo '</pre>';
+
+		if($result>0)
+		{
+			echo _( 'Error when publishing the MySQL tables' ) . ' ('.$result.')<br />';
+
+			echo '<code>'
+					.$tmpfile
+				.'</code>';
+		}
+	}														#	0.0.4
+
+	//$dbh = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);	#	0.0.4
+
+	if($dbh)
+	{
+		#
+		#	Replace links in WordPress tables
+		#
+		echo '<br />';										#	0.0.4
+
+		if($old_link!=$new_link)
+		{
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'options` '
+					.'SET `option_value` = REPLACE(`option_value`, \''.mysql_real_escape_string($old_link).'\', \''.mysql_real_escape_string($new_link).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">' . _( 'Error' ) . '</span> (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u>' . '<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'postmeta` '
+					.'SET `meta_value` = REPLACE(`meta_value`, \''.mysql_real_escape_string($old_link).'\', \''.mysql_real_escape_string($new_link).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">' . _( 'Error' ) . '</span> (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u>' . '<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'posts` '
+					.'SET `post_content` = REPLACE(`post_content`, \''.mysql_real_escape_string($old_link).'\', \''.mysql_real_escape_string($new_link).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">' . _( 'Error' ) . '</span> (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u>' . '<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+
+#
+#	0.0.2: BEG
+#-------------
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'posts` '
+					.'SET `guid` = REPLACE(`guid`, \''.mysql_real_escape_string($old_link).'\', \''.mysql_real_escape_string($new_link).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">' . _( 'Error' ) . '</span> (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u>' . '<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+#-------------
+#	0.0.2: BEG
+#
+		}
+
+		if($table_old_prefix!=$table_prefix)
+		{
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'options` '
+					.'SET `option_name` = REPLACE(`option_name`, \''.mysql_real_escape_string($table_old_prefix).'\', \''.mysql_real_escape_string($table_prefix).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">' . _( 'Error' ) . '</span> (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u>' . '<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'usermeta` '
+					.'SET `meta_key` = REPLACE(`meta_key`, \''.mysql_real_escape_string($table_old_prefix).'\', \''.mysql_real_escape_string($table_prefix).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">' . _( 'Error' ) . '</span> (' . @mysql_errno() . ')<br /><u>' . @mysql_error() . '</u>' . '<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+		}
+
+		if($old_path!=$new_path)
+		{
+			#-----------------------------------------------------
+			$sql = 'UPDATE `'.DB_NAME.'`.`'.$table_prefix.'options` '
+					.'SET `option_value` = REPLACE(`option_value`, \''.mysql_real_escape_string($old_path).'\', \''.mysql_real_escape_string($new_path).'\');'
+			;
+			$sth = mysql_query($sql);
+
+			echo _('Updating your MySQL table') . ':<br /><code>'.$sql.'</code><br />';
+
+			if(!$sth)
+			{
+				echo '<span class="error">'. _( 'Error' ) .'</span> ('.@mysql_errno().')<br /><u>'.@mysql_error().'</u>'.'<br />';
+			}
+			else
+			{
+				echo '<span class="ok">' . _( 'done!  changed' ) . ' <b>' . mysql_affected_rows($dbh) . '</b> ' . _( 'records' ) . '</span>' . '<br />';
+			}
+		}
+
+		#
+		#	WordPress configuration
+		#
+		if(file_exists(INSTALL_PATH . '/wp-config.php'))
+		{
+			$wp_config = file_get_contents(INSTALL_PATH . '/wp-config.php');
+//echo '$wp_config['.htmlspecialchars($wp_config).']';
+
+			//$config_ini = parse_ini_file(INSTALL_PATH . '/myEASYrestore.ini', true);	#	0.0.5
+			$config_ini = parse_ini_file(INSTALL_PATH . '/myEASYrestore_ini.php', true);	#	0.0.5
+
+			$time = date('Y-m-d_H-i-s', time());
+
+			$result = @rename(INSTALL_PATH . '/wp-config.php', INSTALL_PATH . '/wp-config.php.'.$time.'.bak');
+			if($result==true)
+			{
+				echo '<br />'
+						. _( 'The original WordPress configuration file was renamed to:' )
+						.' wp-config.php.'.$time.'.bak'
+						.'<br /><br />'
+				;
+
+				$inp = array();										$out = array();
+				$inp[] = $config_ini['mysql_src']['DB_DB'];			$out[] = DB_NAME;
+				$inp[] = $config_ini['mysql_src']['DB_USER'];		$out[] = DB_USER;
+				$inp[] = $config_ini['mysql_src']['DB_PASSWORD'];	$out[] = DB_PASSWORD;
+				$inp[] = $table_old_prefix;							$out[] = $table_prefix;
+
+				$new_config = str_replace($inp, $out, $wp_config);
+
+				$file = INSTALL_PATH .'/wp-config.php';
+				$fp = fopen($file, 'w');
+				if($fp)
+				{
+					fwrite($fp, $new_config);
+					fclose($fp);
+					chmod(INSTALL_PATH .'/wp-config.php', 0644);
+
+					echo '<span class="ok">' . _( 'WordPress configuration updated successfully!' ) . '</span><br /><br />';
+
+					#
+					#	everything went fine, let's do some cleaning...
+					#
+					//if(isset($_POST['c_remove_zip']) && isset($_POST['filename']))					#	0.0.4
+					if(isset($_POST['c_remove_zip']))					#	0.0.7
+					{
+						$result = @unlink(INSTALL_PATH . '/' . $_POST['filename']);
+						if($result==true)
+						{
+							echo _( 'The compressed data set was successfully removed.' ) . '<br /><br />';
+						}
+						else
+						{
+							echo _( 'Unable to remove the compressed data set file:' )
+									. ' ' . INSTALL_PATH . '/' . $_POST['filename'] . '<br />'
+							;
+						}
+					}
+
+					if(isset($_POST['c_remove_sql']))
+					{
+						$result = @unlink(INSTALL_PATH . '/' . $_POST['sql_filename']);
+						if($result==true)
+						{
+							echo _( 'The original MySQL exported file was successfully removed.' ) . '<br /><br />';
+						}
+						else
+						{
+							echo _( 'Unable to remove the original MySQL exported file:' )
+									. ' ' . INSTALL_PATH . '/' . $_POST['sql_filename'] . '<br />'
+							;
+						}
+					}
+
+					if(isset($_POST['c_remove_php']))
+					{
+						$result = @unlink(INSTALL_PATH . '/myEASYrestore.php');
+						if($result==true)
+						{
+							echo _( 'This script was successfully removed.' ) . '<br /><br />';
+						}
+						else
+						{
+							echo _( 'Unable to remove this script.' ) . '<br />';
+						}
+					}
+
+					//$result = @unlink(INSTALL_PATH . '/myEASYrestore.ini');		#	0.0.5
+					$result = @unlink(INSTALL_PATH . '/myEASYrestore_ini.php');		#	0.0.5
+					if($result==true)
+					{
+						echo _( 'The data set ini file was successfully removed.' ) . '<br /><br />';
+					}
+					else
+					{
+						echo _( 'Unable to remove the data set ini file:' )
+								//. ' ' . INSTALL_PATH . '/myEASYrestore.ini' . '<br />'	#	0.0.5
+								. ' ' . INSTALL_PATH . '/myEASYrestore_ini.php' . '<br />'	#	0.0.5
+
+							. _( 'Please manually remove it ASAP using your preferred FTP program!' )	#	0.0.5
+						;
+					}
+
+					echo '<p><a href="http://'.$_POST['tb_new_value'].'">' . _( 'Click here to load your restored site' ) . '</a></p>';	#	0.0.7
+
+				}
+				else
+				{
+					echo '<span class="error">' . _( 'Unable to update the WordPress configuration!' ) . '</span><br /><br />';
+				}
+			}
+			else
+			{
+				echo  '<span class="error">'
+						. _( 'Unable to rename the original WordPress configuration file.' )
+						.'<br />'
+						. _( 'You need to edit the WordPress configuration file manually.' )
+					. '</span><br /><br />'
+				;
+			}
+		}
+		else
+		{
+			echo '<span class="error">' . _( 'Not able to find the WordPress configuration!' ) . '</span><br /><br />';
+		}
+	}
+	else
+	{
+		echo '<span class="error">' . _( 'Cannot connect to the database' ) . '</span><br /><br />';
+	}
+
+	echo '</div>';						#	0.0.4
+}
+
+echo '<table width="650px">'; # 0.1.0
+
+if(!file_exists('myEASYrestore_ini.php')) {
+
+
+	?><tr>
+		<td colspan="99">
+			<div class="info">
+				<?php echo _( 'Backups available on this server in the following folder' ) . ':<br /><span style="font-weight:bold;">' . INSTALL_PATH . '</span>'; ?>
+			</div>
+		</td>
+	</tr><?php
+
+	if(file_exists(INSTALL_PATH))
+	{
+		$files = scandir(INSTALL_PATH);
+		$i = 0;
+
+		foreach($files as $key=>$value)
+		{
+			if(substr($value,-4)=='.zip'
+				|| substr($value,-4)=='.tar'					#	0.0.8
+				|| substr($value,-4)=='.tgz'					#	0.0.8
+			) {
+				$checked = '';
+				if($value==$_POST['filename'])
+				{
+					$checked = ' checked="checked"';
+				}
+
+				echo '<tr>'
+						.'<td align="right">'
+							.'<input type="radio" id="file-'.$i.'" name="filename" value="'.$value.'"'.$checked.' />'
+						.'</td>'
+						.'<td>'
+							.'<label for="file-'.$i.'">'
+								.$value
+							.'</label>'
+						.'</td>'
+					.'</tr>'
+				;
+				$i++;
+			}
+		}
+	}
+
+	if($i>0)
+	{
+		if(isset($_POST['usePHP'])) {
+			$usePHP = ' checked="checked" ';	#	0.0.4
+		}
+
+		?><tr><td colspan="99" height="12px"></td></tr>
+		<tr><!-- 0.0.4 -->
+			<td colspan="99" align="right">
+				<input type="checkbox" name="usePHP" value="1"<?php echo $usePHP; ?>id="uphp" /> <label for="uphp"><?php echo _( 'Use PHP code rather than <code>system()</code> commands' ); ?></label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="99" align="right" valign="center"><div class="info" style="display:block;color:#eaeaea;background:#444;text-align:left;"><?php
+
+					echo _( 'If you protected the backup with a password,') . '<br />' . _('please enter the password here' ) . ' &raquo;';
+
+				?> <input name="z_password" value="" type="password" size="20" style="font-size:14px;" />
+				</div>
+				<img style="cursor:pointer;" width="120px" height="48px" valign="absmiddle" src="data:image/png;base64,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"
+								onmouseover="javascript:this.src='data:image/png;base64,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';"
+								onmouseout="javascript:this.src='data:image/png;base64,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';"
+								alt="<?php echo _( 'Decompress the selected data set' ); ?>"
+								title="<?php echo _( 'Decompress the selected data set' ); ?>"
+								onclick="javascript:
+											var radio=document.getElementsByName('filename');
+											if(getCheckedValue(radio)=='') {
+												alert('<?php
+
+													echo _( 'Please choose a data set!' );
+
+												?>');
+												return false;
+											}
+											if(confirm('<?php
+
+												echo _( 'You are about to decompress the selected data set.' );
+												echo '\n\n'. _( 'Every file and folder with the same name will be replaced!' );
+												echo '\n\n'. _( 'The data set will be decompressed in this folder:' );
+												echo '\n'. INSTALL_PATH;
+												echo '\n\n'. _( 'Are you sure that you want to proceed?' );
+
+											?>')==false) {
+												return false;
+											};
+											document.myeasyrestore._action.value='UNZIP';
+											document.myeasyrestore.submit();" />
+
+			</td>
+		</tr><?php
+	}
+	else
+	{
+		echo '<tr><td colspan="99" style="font-weight:bold;">'
+				. _( 'Cannot find a data set in this folder!' )
+			. '</td></tr>'
+		;
+	}
+}
+
+//if(file_exists(INSTALL_PATH . '/myEASYrestore.ini'))			#	0.0.5
+if(file_exists(INSTALL_PATH . '/myEASYrestore_ini.php'))		#	0.0.5
+{
+	?><tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99">
+			<div class="info">
+				<?php echo _( 'MySQL exported data sets' ); ?>
+			</div>
+		</td>
+	</tr><?php
+
+	$files = scandir(INSTALL_PATH);
+	$i = 0;
+
+	foreach($files as $key=>$value)
+	{
+		if(substr($value,-4)=='.sql')
+		{
+			$checked = '';
+			if($value==$_POST['sql_filename'])
+			{
+				$checked = ' checked="checked"';
+			}
+
+			echo '<tr>'
+					.'<td align="right">'
+						.'<input type="radio" id="sql_file-'.$i.'" name="sql_filename" value="'.$value.'"'.$checked.' />'
+					.'</td>'
+					.'<td>'
+						.'<label for="sql_file-'.$i.'">'
+							.$value
+						.'</label>'
+					.'</td>'
+				.'</tr>'
+			;
+			$i++;
+		}
+	}
+
+	#
+	#	needed also here to get the values right after the data set was uncompressed
+	#
+	//$config = parse_ini_file(INSTALL_PATH . '/myEASYrestore.ini', true);		#	0.0.5
+	$config = parse_ini_file(INSTALL_PATH . '/myEASYrestore_ini.php', true);	#	0.0.5
+
+	$src_db = $config['mysql_src']['DB_DB'];
+	$src_db_user = $config['mysql_src']['DB_USER'];
+	//$src_db_password = $config['mysql_src']['DB_PASSWORD'];
+	$src_db_charset = $config['mysql_src']['DB_CHARSET'];
+	$src_db_collate = $config['mysql_src']['DB_COLLATE'];
+
+	$src_db_tbl_prefix = $config['mysql_src']['TBL_PREFIX'];
+
+	$src_path = $config['siteinfo_src']['Root_path'];
+	$src_info_site = $config['siteinfo_src']['Site'];
+	$src_info_host = $config['siteinfo_src']['Host'];
+	$src_info_server_info = $config['siteinfo_src']['Server_info'];
+	$src_info_server_protocol = $config['siteinfo_src']['Server_protocol'];
+
+	$src_use_PHP_code = $config['options']['Use_PHP_code'];		#	0.0.4
+
+	?><tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99">
+			<div class="info">
+				<?php echo _( 'Info about the server where the data set was created' ); ?>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Database' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_db; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'User' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_db_user; ?></td>
+	</tr><?php
+
+	/*
+	<tr>
+		<td><?php echo _( 'Password' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_db_password; ?></td>
+	</tr>
+	*/
+
+	?><tr>
+		<td><?php echo _( 'MySQL charset' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_db_charset; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'MySQL collate' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_db_collate; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'MySQL tables prefix' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_db_tbl_prefix; ?></td>
+	</tr>
+
+	<tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td><?php echo _( 'Server' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_info_site; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'MySQL connection' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_info_host; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'MySQL server' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_info_server_info; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'MySQL protocol' ); ?>:</td>
+		<td style="font-weight:bold;"><?php echo $src_info_server_protocol; ?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Was the database saved using PHP code?' ); ?>:</td>
+		<td style="font-weight:bold;" valign="bottom"><?php if($src_use_PHP_code==true) { echo _( 'Yes' ); } else  echo _( 'No' ); {} ?></td>
+	</tr>
+
+	<tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99">
+			<div class="info">
+				<?php echo _( 'How to connect to MySQL on this server' ); ?>
+			</div>
+		</td>
+	</tr><?php
+
+	#
+	#	default values for input fields
+	#
+	if($_POST['db_host']=='')		{ $_POST['db_host'] = 'localhost'; }
+
+	if($_POST['tb_old_prefix']=='')	{ $_POST['tb_old_prefix'] = $src_db_tbl_prefix; }
+	if($_POST['tb_prefix']=='')		{ $_POST['tb_prefix'] = $src_db_tbl_prefix; }
+
+	if($_POST['tb_old_value']=='')	{ $_POST['tb_old_value'] = $src_info_site; }
+	if($_POST['tb_new_value']=='')	{ $_POST['tb_new_value'] = $_SERVER['HTTP_HOST']; }
+
+	if($_POST['pth_old_value']=='')	{ $_POST['pth_old_value'] = $src_path; }
+	if($_POST['pth_new_value']=='')	{ $_POST['pth_new_value'] = INSTALL_PATH; }
+
+
+	?><tr>
+		<td><?php echo _( 'DB host' ); ?>:</td>
+		<td><input type="text" size="30" name="db_host" value="<?php echo $_POST['db_host']; ?>" /></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'DB name' ); ?>:</td>
+		<td><input type="text" size="30" name="db_name" value="<?php echo $_POST['db_name']; ?>" /></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'DB user' ); ?>:</td>
+		<td><input type="text" size="30" name="db_user" value="<?php echo $_POST['db_user']; ?>" /></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'DB password' ); ?>:</td>
+		<td><input type="password" size="30" name="db_password" value="<?php echo $_POST['db_password']; ?>" /></td>
+	</tr>
+
+	<tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99">
+			<div class="info">
+				<?php echo _( 'Changes to apply to the MySQL tables on this server' ); ?>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="99" style="font-weight:bold;padding:6px;">
+			<?php echo _( 'If you need to change the tables names prefix, enter the new value in the table prefix field here below' ); ?>:
+		</td>
+	</tr>
+	<tr>
+		<td nowrap><?php echo _( 'Tables old prefix' ); ?>:</td>
+		<td><input readonly type="text" size="30" name="tb_old_prefix" value="<?php echo $_POST['tb_old_prefix']; ?>" /></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Tables prefix' ); ?>:</td>
+		<td><input type="text" size="30" name="tb_prefix" value="<?php echo $_POST['tb_prefix']; ?>" /></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<span class="small">(<?php
+
+			echo _( 'lowercase is better to' ); ?> <a href="http://esdev.net/wordpress-error-you-do-not-have-sufficient-permissions-to-access-this-page/" target="_blank"><?php
+			echo _( 'avoid possible issues' ); ?></a>)</span>
+
+		</td>
+	</tr>
+
+	<tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99" style="padding:6px;"><?php
+
+			echo '<p style="font-weight:bold;">'
+					. _( 'If you are migrating your WordPress installation to a new server, myEASYrestore will automatically change every reference in the MySQL tables (otherwise each link will redirect to the old server).' )
+				.'</p>'
+			;
+
+		?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Saved at' ); ?>:</td>
+		<td colspan="2"><span class="http">http://</span><input type="text" size="30" name="tb_old_value" value="<?php echo $_POST['tb_old_value']; ?>" /></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Installing at' ); ?>:</td>
+		<td colspan="2"><span class="http">http://</span><input type="text" size="30" name="tb_new_value" value="<?php echo $_POST['tb_new_value']; ?>" /></td>
+	</tr>
+
+
+	<tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99" style="padding:6px;"><?php
+
+			echo '<p style="font-weight:bold;">'
+					. _( 'All references to the old installation path will also be corrected to the new path as follow:' )
+				.'</p>'
+			;
+
+		?></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Saved from path' ); ?>:</td>
+		<td colspan="2"><input readonly type="text" size="30" name="pth_old_value" value="<?php echo $_POST['pth_old_value']; ?>" /></td>
+	</tr>
+	<tr>
+		<td><?php echo _( 'Installing to path' ); ?>:</td>
+		<td colspan="2"><input readonly type="text" size="30" name="pth_new_value" value="<?php echo $_POST['pth_new_value']; ?>" /></td>
+	</tr><?php
+
+		#
+		#	0.0.4
+		#
+		if($src_use_PHP_code==true)
+		{
+			?><tr><td colspan="99" height="12px"></td></tr>
+			<tr>
+				<td colspan="99" style="padding:6px;"><?php
+
+					echo '<p style="font-weight:bold;">'
+							. _( 'You may need to see all the queries used to restore your tables data. If not need avoid to select this option as it might create a very long page and take more time.' )
+						.'</p>'
+					;
+
+				?></td>
+			</tr>
+			<tr>
+				<td><label for="c_verbose"><?php echo _( 'Show all queries' ); ?></label>:</td>
+				<td><input type="checkbox" name="c_verbose_sql" id="c_verbose" value="1" /></td>
+			</tr><?php
+		}
+
+	?><tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99">
+			<div class="info">
+				<?php echo _( 'Keeping your new installation tidy &mdash; will be applied only if the tables are successfully updated' ); ?>
+			</div>
+		</td>
+	</tr>
+	<tr><?php
+
+			#
+			#	@since 0.0.4
+			#
+			$checked_zip = '';
+			if($value==$_POST['c_remove_zip'] || !isset($_POST['c_remove_zip']))	#	@since 0.0.7
+			{
+				$checked_zip = ' checked="checked"';
+			}
+
+			$checked_sql = '';
+			if($value==$_POST['c_remove_sql'] || !isset($_POST['c_remove_sql']))	#	@since 0.0.7
+			{
+				$checked_sql = ' checked="checked"';
+			}
+
+			$checked_php = '';
+			if($value==$_POST['c_remove_php'] || !isset($_POST['c_remove_php']))	#	@since 0.0.7
+			{
+				$checked_php = ' checked="checked"';
+			}
+
+		?><td align="right"><input type="checkbox" name="c_remove_zip" id="c_zip" value="1"<?php echo $checked_zip; ?> /></td>
+		<td> <label for="c_zip"><?php echo _( 'Remove the data set compressed file .zip' ); ?></label></td>
+	</tr>
+	<tr>
+		<td align="right"><input type="checkbox" name="c_remove_sql" id="c_sql" value="1"<?php echo $checked_sql; ?> /></td>
+		<td> <label for="c_sql"><?php echo _( 'Remove the MySQL exported file .sql' ); ?></label></td>
+	</tr>
+	<tr>
+		<td align="right"><input type="checkbox" name="c_remove_php" id="c_php" value="1"<?php echo $checked_php; ?> /></td>
+		<td> <label for="c_php"><?php echo _( 'Remove this page' ); ?></label></td>
+	</tr>
+	<tr><td colspan="99" height="12px"></td></tr>
+	<tr>
+		<td colspan="99" align="right">
+
+			<img style="cursor:pointer;" width="48px" height="48px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9oDCw8mK4vuVWEAAAQQSURBVGje7VlLS2NJFP6q7iNX0fbROsMwMkQQNBjBB3bstRuXw4xuBr1mEdRd0P8QEVy50r3ZzErof9G0DwKKBlp0IE7LwKg92PHWvfWYRV9Dz0wTzb2JUcYDRVUCVed89Z366lQCPNuz/b+NhJmcTCZ/lFJuBZ2vlBrd3NzcrgvymZmZxPz8/KdisaiC2NnZmUylUpfJZHLgwRmYnp7uiUQi28vLyy0dHR24ubmpzCkhsCwLJycnamVl5cpxnFfZbPZ9kFi0SifMzc21EELepdPpl9FolDiOE2jnhBDo7Owk3d3d1u7u7i/xePzXXC73sdJ1aADH21NTU98MDAxQxhiUUkHzH4wxxONxkkql2imlh0HWqRiA53k9ExMTBmMMUspQ50hKCcYYEokElVI2BllDD+r8/Py8aoIQjUYDz9XDON7Z2Qkd/OjoaKj5gQHc5n5XV1dg54VCAZqmhQJAUWcLKgKhAYR1XC3Twy5QKBTqykCoMzAyMhI6h4UQ9QNQDRUaHh6ubwo9WRV6LIf4ycto6IssrArVVUYHBwcryuGv7bbneaXx2traWyHET0tLS2cVAVhcXPxeStntuu4PhJDvAHRIKQ0AlFKqSSmpn25asVgsBcM5B+e8arvZ398/ure3925hYeENAEEIEUopSQgRUkphWdafuq6fa5pWMAzjfSaT+U0HgMnJScswDE3XdRmJRFzLshjnXHLOTc459TxP8zzPVEoZGxsbZYPY39+vKOihoaHSOBaLkVwu961t2w2aprmaprmmaXJKKbcsi1FKTQBN19fXTa7rvshkMp8ZWF9fLzqO4ymlpOd51H+p6YQQzW+UEAKlFJqbm0sMXFxc4Ojo6NY52traKpLWQqEA0zRLnw8PDxVj7I/V1VUQQogQggLQlFISgE4p/UgpvdR1/ZJSelVKoWw2+wHAh/s4tW3bvh3n83mMj4/j+PgY+XweY2NjoVLo4ODgraZpP29tbf3+YCp0enpaeqiHlcR0Ov36QVWot7cX+XweANDX1xdIWut6D7S2tiKRSPzj+1gs9vmGpPQ/7WvGGKvfPVBu94QQoSvN51roLgBfNiklCCEQQtzZ/3v+oyjmOOcwDAOMsbK953mhS+iaMOB5HnRdh+M4ZXvXdUEpfXwMCCHuxcAtgEf3HngqKWSEBeC6bjkAbajwF/NKAGi+g9AMlEmhdgAttQLQCKDpLgCu697Zl2Hghe+joRYADABmuUNsmiYYY2V7znk5AA2+D6MWl147gD7btlUtzLZtBeA1gB6fiarXQi4ABwBmZ2drVRncAGC+r3tZJX/yEQAv/UPW6IOvlh56AASATwCuAFzWAsAtY80ALD/4agEQALjPwF8AVK0AfCmpRpUBuAAknu2J2d/uDd6d1EKcTQAAAABJRU5ErkJggg=="
+							onmouseover="javascript:this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9oDCxAND9bnqJQAAAPqSURBVGje7VdfaFtVHP7OOfcm127ptDbQaFdbLLLaFEGRMBwKbQdFfJDRvEh6G7as7ZOhfRJ8Ti0UH/rUgk6QxidhfXfudYJouzyU1ofSojfuQbbJFtN77p9zfNilboPE5d7cZtN8EH4Jh9+f75zf+fI7QBtt/L9Bgjhns9nPhBCf+PWXUurr6+vrLWE+NTV1cXZ2VlarVekH5XJZ5nI5kc1mLxz7CWQymbFoNHptcXGRdHd34/DwsLGkhEDTNOzv72NpaUmapnm+WCxe91MLa9RhZmbmNCHkp3w+T/v7+2Gapq+dc10X8XgcAwMDZHNzM5NMJr8rlUpGo3Goj8R76XSajYyMgHMOKaXf/gfnHMlkErlcjlJKf/ATp2ECtm2rExMT4JxDCBHoHgkhwDlHKpXyHUvxm7zj0udNEwTxzae+fZUgib+9cCZw8emru4H8laAF9Pb2+vY1DAMfpV4LlJ+ixfj19v1nm0BQBG4hwzCCncCd+60jkL66i76ukwEJVFpHoK1CAdvvP3GJ2yrUjDZoqQo1EysrKxXXdd9bWFj4uSEC8/PzbwkhUpZlvU4I6QMQF0IoACillAkhiNdutFqthrabw8PDJ7a2tn6cm5vbBSAIIa6UUhJCXCGEq2nabUVRyoyxX1RVvVEoFG4oADA5OdmpqqqiKIqIRqNc0zTuOI5wHEd1HIfatq3Ytq1KKdna2lpTpfXhUxwaGkKpVKK6rkcZYw5jDJFIxKKUOpqmWZTSKIDOSqXSZVlWT6FQeHACq6urd03T5FJK17Zt5r3UGCGEEUIoeQBIKRGLxR4p4MuxBAAgd/1Ww9JqGAbODSaOfu/s7IBzLpaXl0EIIa7rUgBMSikAKJTSPymlfyiKcotSWj5qoWKxeBPAzSdJquv60RPsyvhLGB0dxd7eHr46T3HxWjlQC21vb1cYY+9ubGxsHZsKHRwcHD3UgyKfz8eOVYUuff87roz/892PtLZ0mHu88DCktT1KtAm0CRwzgURMq2ufagLnBhP4evKNuvaDMz1PJ4FETMMX2XFwzuvaj8++0lICHbUWLr/dh/ipk+Cc17WWZdWLPwAgEhaBCID+Wovv9D0PVVXBOa9rbdt+ZIB7DP0ATodF4EUA8VqLjuNAVVVYlvWvNnO25sjd4+XoCoNAB4ATtRZd10UkEgHnvK51HAcfvjlYK0ynl+O5MBTrVQDv67ouw4A3pl8GMAbg5TCGuQqAewAwPT0d1v/SPS/PX0/qQBq8L4Pe7rwAINqMadaDCcAGcAfAbwD2wyAAABqABIBTAFTv0wzYADiAuwDKAERYBB6W1I5GNbsOLK91HLTxjOFvs4Eyt6KNbCMAAAAASUVORK5CYII=';"
+							onmouseout="javascript:this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9oDCw8mK4vuVWEAAAQQSURBVGje7VlLS2NJFP6q7iNX0fbROsMwMkQQNBjBB3bstRuXw4xuBr1mEdRd0P8QEVy50r3ZzErof9G0DwKKBlp0IE7LwKg92PHWvfWYRV9Dz0wTzb2JUcYDRVUCVed89Z366lQCPNuz/b+NhJmcTCZ/lFJuBZ2vlBrd3NzcrgvymZmZxPz8/KdisaiC2NnZmUylUpfJZHLgwRmYnp7uiUQi28vLyy0dHR24ubmpzCkhsCwLJycnamVl5cpxnFfZbPZ9kFi0SifMzc21EELepdPpl9FolDiOE2jnhBDo7Owk3d3d1u7u7i/xePzXXC73sdJ1aADH21NTU98MDAxQxhiUUkHzH4wxxONxkkql2imlh0HWqRiA53k9ExMTBmMMUspQ50hKCcYYEokElVI2BllDD+r8/Py8aoIQjUYDz9XDON7Z2Qkd/OjoaKj5gQHc5n5XV1dg54VCAZqmhQJAUWcLKgKhAYR1XC3Twy5QKBTqykCoMzAyMhI6h4UQ9QNQDRUaHh6ubwo9WRV6LIf4ycto6IssrArVVUYHBwcryuGv7bbneaXx2traWyHET0tLS2cVAVhcXPxeStntuu4PhJDvAHRIKQ0AlFKqSSmpn25asVgsBcM5B+e8arvZ398/ure3925hYeENAEEIEUopSQgRUkphWdafuq6fa5pWMAzjfSaT+U0HgMnJScswDE3XdRmJRFzLshjnXHLOTc459TxP8zzPVEoZGxsbZYPY39+vKOihoaHSOBaLkVwu961t2w2aprmaprmmaXJKKbcsi1FKTQBN19fXTa7rvshkMp8ZWF9fLzqO4ymlpOd51H+p6YQQzW+UEAKlFJqbm0sMXFxc4Ojo6NY52traKpLWQqEA0zRLnw8PDxVj7I/V1VUQQogQggLQlFISgE4p/UgpvdR1/ZJSelVKoWw2+wHAh/s4tW3bvh3n83mMj4/j+PgY+XweY2NjoVLo4ODgraZpP29tbf3+YCp0enpaeqiHlcR0Ov36QVWot7cX+XweANDX1xdIWut6D7S2tiKRSPzj+1gs9vmGpPQ/7WvGGKvfPVBu94QQoSvN51roLgBfNiklCCEQQtzZ/3v+oyjmOOcwDAOMsbK953mhS+iaMOB5HnRdh+M4ZXvXdUEpfXwMCCHuxcAtgEf3HngqKWSEBeC6bjkAbajwF/NKAGi+g9AMlEmhdgAttQLQCKDpLgCu697Zl2Hghe+joRYADABmuUNsmiYYY2V7znk5AA2+D6MWl147gD7btlUtzLZtBeA1gB6fiarXQi4ABwBmZ2drVRncAGC+r3tZJX/yEQAv/UPW6IOvlh56AASATwCuAFzWAsAtY80ALD/4agEQALjPwF8AVK0AfCmpRpUBuAAknu2J2d/uDd6d1EKcTQAAAABJRU5ErkJggg==';"
+							alt="Publish the MySQL tables on the server"
+							title="Publish the MySQL tables on the server"
+							onclick="javascript:
+										var radio=document.getElementsByName('sql_filename');
+										if(getCheckedValue(radio)=='') {
+											alert('<?php
+
+												echo _( 'Please choose a MySQL data set!' );
+
+											?>');
+											return false;
+										}
+										if(confirm('<?php
+
+											echo _( 'You are about to publish the MySQL tables on this server.' );
+											echo '\n\n'. _( 'Every table with the same name will be replaced!' );
+											echo '\n\n'. _( 'Are you sure that you want to proceed?' );
+
+										?>')==false) {
+											return false;
+										};
+										document.myeasyrestore._action.value='RESTORE_TABLES';
+										document.myeasyrestore.submit();" />
+
+		</td>
+	</tr><?php
+
+}
+
+?></table>
+	</form>
+	<div align="center">
+		<span class="small">&copy; 2010,<?php echo date('Y', time()); ?> <a href="http://myeasywp.com" target="_blank">myeasywp.com</a> &mdash; All Rights Reserved. | <?php echo _('Version') . ' ' . $MER_VERSION; ?></span>
+	</div>
+</div><!-- wrapper -->
+
+<script type="text/javascript">
+// return the value of the radio button that is checked
+// return an empty string if none are checked, or
+// there are no radio buttons
+function getCheckedValue(radioObj) {
+	if(!radioObj)
+		return "";
+	var radioLength = radioObj.length;
+	if(radioLength == undefined)
+		if(radioObj.checked)
+			return radioObj.value;
+		else
+			return "";
+	for(var i = 0; i < radioLength; i++) {
+		if(radioObj[i].checked) {
+			return radioObj[i].value;
+		}
+	}
+	return "";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?php
+/**
+ * Plugin Name: myEASYbackup
+ * Plugin URI: http://myeasywp.com/plugins/myeasybackup/
+ * Version: 1.0.5.5
+ * Author: Ugo Grandolini aka "camaleo"
+ *
+ * TOOL TO REMOVE ALL THE PLUGIN SETTINGS.
+ *
+ * !!! WARNING !!!
+ *
+ * This tool automatically removes ALL your myEASYbackup settings
+ * without asking anything. For this reason it is stored without extension,
+ * by doing this we prevent any unauthorized user to remove the plugin settings.
+ *
+ * Instructions:
+ *
+ * 1) Using an FTP program rename this file to "myeasybackup-reset.php"
+ *
+ * 2) On your browser enter the following address - be sure to REPLACE
+ *    "example.com" WITH the address of your blog:
+ *
+ *      http://example.com/wp-content/plugins/myeasybackup/myeasybackup-reset.php
+ *
+ * 3) Using an FTP program rename this file to "myeasybackup-reset"
+ *
+ */
+require_once('../../../wp-load.php');
+
+echo '<h2>Tool to remove all the myEASYbackup settings.</h2>';
+
+$sql = 'SELECT * FROM `'.$wpdb->options.'` WHERE `option_name` LIKE \'meb_%\'';
+$rows = $wpdb->get_results( $sql );
+foreach($rows as $row) {
+
+	echo $row->option_name.' removed!<br />';
+	delete_option( $row->option_name );
+}
+
+echo '<h3>All the myEASYbackup plugin options are now removed.</h3>'
+	.'<p>The plugin is still active but it does not do his work until you reconfigure its options.</p>'
+	.'<p>Be sure to <span style="color:red;font-weight:bold;">rename this file as soon as possible</span> to avoid the risk to get the plugin options removed by someone else!</p>'
+
+	.'<br /><p><a href="http://'.$_SERVER['HTTP_HOST'].'">Click here to return to the home page</a>.</p>'
+;
+
+?>

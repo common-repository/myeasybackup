@@ -1,0 +1,749 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: myEASYbackup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-10 14:45+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ugo Grandolini <info@myeasywp.com>\n"
+"Language-Team:  <info@myeasywp.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup\n"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:202
+msgid "Update Options"
+msgstr "Opciones de Actualizacion"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:207
+msgid "If your provider does not allow you to change the server configuration, please let me suggest a very good, professional and serious hosting service provider."
+msgstr "Si tu proveedor no te permite cambiar la configuraciòn de tu servidor, permiteme de sugerirte uno muy bueno, profesional  y serio."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:208
+msgid "I am using their services since 2006 and"
+msgstr "Yo estoy usando sus servicios desde el 2006 y "
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:210
+msgid "never had problem without a prompt solution"
+msgstr "nunca he tenido un problema sin una soluciòn a la mano."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:215
+msgid "Prices start at $4.95/month with"
+msgstr "Los precios van desde $4,95 al mes"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:217
+msgid "UNLIMITED Disk Space"
+msgstr "Espacio ILIMITADO del disco"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:220
+msgid "UNLIMITED Bandwidth"
+msgstr "ILIMITADA amplitud de banda"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:223
+msgid "Powered by 130% wind energy!"
+msgstr "Motorizado por 130% energia del viento!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:229
+msgid "Click here to see all the offers"
+msgstr "Pulsa aqui para ver todas la ofertas"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:235
+msgid "If you buy the hosting service by using the link provided here above, you will automatically reward my effort"
+msgstr "Si compras el servicio de hosting usando el link que te he dado arriba, automaticamente recompensaras mi esfuerzo"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb-config.php:237
+msgid "at no extra cost"
+msgstr "sin ningun costo extra."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:41
+msgid "Please wait, backup in progress..."
+msgstr "Por favor espera, copia de seguridad en progresso"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:48
+msgid "Please wait, uploading in progress..."
+msgstr "Por favor espera, cargamento en progreso"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:63
+msgid "Back to the main page"
+msgstr "Regresa a la pagina principal"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:71
+msgid "Open the settings page"
+msgstr "Por favor, abre la pagina de configuracion"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:109
+msgid "Invalid characters in one of your variables."
+msgstr "Tipo de letra invalido en una de tus variables"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:132
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:146
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:174
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:189
+msgid "Adding folder "
+msgstr "Anadiendo folder"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:221
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:226
+msgid "myEASYbackup"
+msgstr "myEASYbackup"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:235
+msgid "myEASYbackup: Settings"
+msgstr "myEASYbackup: Configuracion"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:263
+msgid "Backup, restore and migrate your WordPress installation"
+msgstr "Has una copia de seguridad, recupera y mueve tu instalacion WordPress"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:268
+msgid "This is a Linux server"
+msgstr "Este es un servidor Linux"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:272
+msgid "This is a Windows server"
+msgstr "Este es un servidor Windows"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:331
+msgid "Missing the ZipArchive class"
+msgstr "Falta la clase del ZipArchive"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:338
+msgid "Current PHP version on this server"
+msgstr "Actual version PHP en este servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:346
+msgid "You are running your site on a server that is not updated since 2001!"
+msgstr "Tu sitio esta funcionando en un servidor que no ha estado actualizado desde el 2001!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:350
+msgid "Please consider to take one of the following actions as soon as possible:"
+msgstr "Por favor, piensa en hacer una de las siguientes acciones tan pronto como sea posible"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:353
+msgid "ask your provider to update the server configuration"
+msgstr "pidele a tu proveedor que te actualice la configuracion de tu servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:356
+msgid "change provider, can you trust a provider running such an old configuration still in the "
+msgstr "cambia proveedor -puedes fidarte de un proveedor que usa una configuracion asi de vieja aun en el"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:367
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:405
+msgid "Instructions to install the ZipArchive class are"
+msgstr "Instrucciones para instalar la clase del ZipArchive estan"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:370
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:408
+msgid "available here"
+msgstr "disponibles aqui"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:377
+msgid "However "
+msgstr "Sin embargo"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:380
+msgid "PHP 4 shows its age. Most of PHP 4's shortcomings have been addressed by PHP 5,"
+msgstr "PHP 4 muestra su edad. La mayoria de las deficiencias del PHP 4, han sido resueltas por PHP 5"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:383
+msgid "released on 2004..."
+msgstr "lanzado en el 2004"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:391
+msgid "For further information about why you should consider to ask your provider to update the server configuration, visit "
+msgstr "Para mayor informacion de porque deberias considerar pedirle a tu proveedor de actualizar la configuracion del servidor, visita"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:395
+msgid "gophp5.org"
+msgstr "gophp5.org"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:428
+msgid "WARNING: SAFE_MODE is enabled on your server PHP configuration!"
+msgstr "ADVERTENCIA: MODO_SEGURO esta abilitado en la configuracion del servidor de tu PHP!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:430
+msgid "Due to this setting myEASYbackup is not able to write the data set on your server."
+msgstr "Debido a esta configuracion  myEASYbckup no es capaz de escribir la informacion puesta en tu servidor."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:433
+msgid "This setting was an attempt to solve the shared-server security problem, is deprecated since in PHP 5.3.0 and will be removed in PHP 6.0.0."
+msgstr "Esta configuracion fue un intento para resolver el problema de seguridad del servidor-compartido, es obsoleto desde PHP 5.3.0 y sera removido en PHP 6.0.0"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:437
+msgid "Click here for further info about the SAFE_MODE setting"
+msgstr "Pulsa aqui para mayor informacion acerca de la configuracion del MODO_SEGURO (SAFE_MODE) "
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:441
+msgid "Read more about SAFE_MODE on the PHP site"
+msgstr "Lee mas acerca del MODO_SEGURO (SAFE_MODE) en este sitio"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:463
+msgid "successfully created!"
+msgstr "creado exitosamente!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:469
+msgid "Error when creating "
+msgstr "Error mientras creaba"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:476
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:503
+msgid "Please manually create the"
+msgstr "Por favor crea manualmente el"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:478
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:505
+msgid "folder using your preferred FTP program."
+msgstr "folder usando tu programa FTP preferido"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:479
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:506
+msgid "Then give it full privileges (at least 775) and reload this page."
+msgstr "Después dale todos los privilegios (al menos 755) y recarga esta pagina"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:496
+msgid "The backup folder does not exist "
+msgstr "El folder de copia de seguridad no existe"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:529
+msgid "It looks like that you can get better performances as the following conditions are met:"
+msgstr "Parece que puedes obtener mejore ejecucion si se tienen las siguientes condiciones:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:532
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:564
+msgid "it is possible to use the PHP `system()` command"
+msgstr "es posible usar el comando 'sistema ()' de PHP"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:535
+msgid "the plugin settings are forcing it to use the ZipArchive class"
+msgstr "la configuracion del plugin esta forzandolo a usar la clase de ArchivoZip"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:538
+msgid "In these conditions it is possible that PHP runs beyond the available memory allocated to your account. In such cases there is nothing I can do to override the limitation."
+msgstr "En estas condiciones es posible que PHP trabaje mas alla de la memoria disponible establecida para tu cuenta. En estos casos, no hay nada que yo pueda hacer para superar esa limitacion."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:541
+msgid "However, by opening the Setting page and disabling the \"Use PHP code rather than system() commands\" option, you will let the plugin to use the system() command overriding the memory limitation and getting better performances as system() is quite faster."
+msgstr "Sin embargo, abriendo la pagina de Configuracion y deshabilitando la opcion \"Usa el codigo PHP en lugar de los comandos del sistema ()\", dejaras que el plugin use el comando () del sistema para superar la limitacion de memoria y obtener mejor ejecucion dado que el sistema () es mucha mas rapido."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:546
+msgid "Note: remember to save the new setting by clicking on the \"Update Options\" button once you have changed the setting!"
+msgstr "Nota: recuerda salvar la nueva configuracion clickando en el boton \"Actualizar Opciones\" una vez que hayas cambiado la configuracion!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:561
+msgid "It looks like that you need to change your settings to be able to backup on this server as the following conditions are met:"
+msgstr "Parece que tienes que cambiar tu configuracion para poder hacer una copia de seguridad en este servidor mientras las siguientes condiciones se den:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:567
+msgid "the PHP ZipArchive class is not installed on this server but the plugin settings are forcing its use"
+msgstr "la clase de ArchivoZip PHP no esta instalado en este servidor pero la configuracion del plugin esta forzando su uso"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:570
+msgid "Solution: open the Setting page and disable the \"Use PHP code rather than system() commands\" options, then click on the \"Update Options\" button and try again to create a data set."
+msgstr "Solucion: abre la pagina de Configuracion y desactiva la opcion \"Usa el codigo PHP en lugar de los comandos () del sistema\", luego clicka en el boton \"Actualiza Opciones\" y trata de nuevo a crear un set de datos."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:586
+msgid "It looks like that there is no way to backup on this server as the following conditions are met:"
+msgstr "Parece que no hay forma de hacer una copia de seguridad en este servidor mientras que las siguientes condiciones se den:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:589
+msgid "it is not possible to use the PHP `system()` command as it was disabled by your hosting provider"
+msgstr "no es posible usar el comando PHP 'sistema ()' ya que ha sido desactivado por tu proveedor de hosting"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:592
+msgid "it is not possible to use the PHP ZipArchive class as it is not installed on this server"
+msgstr "no es posible usar la clase de ArchivoZip PHP ya que no esta disponible en este servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:611
+msgid "Downloading"
+msgstr "Descargando"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:636
+msgid "It looks like you have not defined the FTP credentials"
+msgstr "Parece que no has definido las credenciales FTP"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:641
+msgid "Set the FTP credentials"
+msgstr "Configura las credenciales FTP"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:657
+msgid "Uploading a data set"
+msgstr "Cargando una configuracion de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:679
+msgid "FTP connection has failed!"
+msgstr "La conexion FTP ha fallado!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:682
+msgid "Server"
+msgstr "Servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:686
+msgid "User"
+msgstr "Usuario"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:697
+msgid "Connected to"
+msgstr "Conectado a"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:700
+msgid "as user"
+msgstr "como usuario"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:740
+msgid "hours"
+msgstr "horas"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:745
+msgid "minutes"
+msgstr "minutos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:750
+msgid "seconds"
+msgstr "segundos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:759
+msgid "estimated remaining time"
+msgstr "tiempo restante estimado"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:763
+msgid "transfer rate"
+msgstr "velocidad de transferencia"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:796
+msgid "Data set size on this system:"
+msgstr "Medida de conjunto de datos en el servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:799
+msgid "Data set size on "
+msgstr "Medida del conjunto de datos en"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:819
+msgid "Uploading the myEASYrestore tool..."
+msgstr "Cargando la herramienta myEASYrestore (restaurar)"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:848
+msgid "FTP upload has failed!"
+msgstr "la carga de FTP ha fallado!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:855
+msgid "Upload completed successfully!"
+msgstr "Carga completada exitosamente!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:858
+msgid "FTP server"
+msgstr "servidor FTP"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:862
+msgid "File on this server"
+msgstr "Archivo en este servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:866
+msgid "File on the remote server"
+msgstr "Archivo en un servidor remoto"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:876
+msgid "Unable to upload the myEASYrestore tool!"
+msgstr "Incapaz de cargar la herramienta myEASYrestore (restaurar)!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:883
+msgid "myEASYrestore tool successfully uploaded!"
+msgstr "la herramienta myEASYrestore  ha sido cargada con exito!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:891
+msgid "You decided NOT to upload the myEASYrestore tool."
+msgstr "Has decidido de NO cargar la herramienta myEASYrestore."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:920
+msgid "deleted"
+msgstr "borrado"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:949
+msgid "Check this to add the database tables to the data set"
+msgstr "Marca esto para anadir las tablas dela base de datos al conjunto de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:958
+msgid "The data set will be saved in this path"
+msgstr "El conjunto de datos sera salvado en esta trayectoria"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:969
+msgid "Note: you can change this path in the \"Settings\" menu."
+msgstr "Nota: puedes cambiar esta trayectoria en el menu \"Configuracion\"."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:983
+msgid "Check this to add the WordPress installation folder to the data set"
+msgstr "Marca esto para anadir el folder de instalacion WordPress al conjunto de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:998
+msgid "Warning: the selected path is"
+msgstr "Advertencia: la trayectoria seleccionada es"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:999
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1001
+msgid "NOT"
+msgstr "NO"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1000
+msgid "writable, it is"
+msgstr "escritura, es"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1002
+msgid "possible to proceed with the backup!"
+msgstr "posible conectarse a la base de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1014
+msgid "Click on the briefcase to create a new data set"
+msgstr "Pulsa en la carpeta para crear un nuevo conjunto de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1018
+msgid "Click on the briefcase to backup the selected folders"
+msgstr "Pulsa en la carpeta para crear una copia de seguridad de las carpetas seleccionadas"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1029
+msgid "BRIEFCASE"
+msgstr "CARPETA"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1043
+msgid "There are no data sets on the server"
+msgstr "Noy hay conjuntos de datos en el servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1047
+msgid "Data sets on the server"
+msgstr "Conjunto de datos en el servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1051
+msgid "A data set (each suitcase) is a compressed (.zip) file including your backup."
+msgstr "Un conjunto de datos (cada carpeta) es una carpeta (.zip) comprimida incluyendo tu copia de seguridad."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1053
+msgid "Its content depends on what options you selected when doing the backup: the tables, the WordPress installation folder or both."
+msgstr "Su contenido depende en que opciones has seleccionado cuando estabas haciendo la copia de seguridad:  las tablas, la carpeta de instalacion de WordPress o ambos."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1061
+msgid "Click on the wrench to include the myEASYrestore tool"
+msgstr "Pulsa en  la llave inglesa para incluir la herramienta myEASYrestore"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1084
+msgid "WRENCH"
+msgstr "LLAVE INGLESA"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1089
+msgid "Note: in order to be able to use the myEASYrestore tool, you need to enable this option: a) when creating a backup; b) when uploading a data set."
+msgstr "Nota: para poder usar la herramienta myEASYrestore, necesitas activar esta opcion: a) cuando estas creando una copia de seguridad; b) cuando estas cargando un conjunto de datos."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1090
+msgid "If you include the myEASYrestore tool when creating the data set, the myEASYrestore_ini.php will be included in the data set even if you do not add your WordPress installation folder."
+msgstr "Si incluyes la herramienta myEASYrestore cuando estabas creando el conjunto de datos, la myEASYrestore_ini.php sera incluida en el conjunto de datos aunque si tu anades la carpeta de instalacion de WordPress"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1152
+msgid "Please type the password to connect to"
+msgstr "Por favor, escribe tu contrasena para conectar a"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1178
+msgid "Are you sure that you want to delete this data set?"
+msgstr "Estas seguro que quieres borrar este conjunto de datos?"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1194
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1213
+msgid "bytes"
+msgstr "bytes"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1204
+msgid "Total space used by data sets"
+msgstr "Espacio total usado por conjunto de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1232
+msgid "Impossible to connect to the MySQL server"
+msgstr "Imposible conectarse al servidor de MySQL"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1234
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1245
+msgid "MySQL Error"
+msgstr "Error MySQL"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1243
+msgid "Impossible to connect to the database"
+msgstr "Imposible conectarse a la base de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1254
+msgid "File name is mandatory!"
+msgstr "Es obligatorio el nombre del archivo!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1277
+msgid "Backup file"
+msgstr "Archivo de seguridad"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1279
+msgid "does already exists: please try again with a different name."
+msgstr "ya existe: por favor, prueba de nuevo con un nombre diferente"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1287
+msgid "Backing up..."
+msgstr "Haciendo copia de seguridad..."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1300
+msgid "Extracting database tables..."
+msgstr "Extrayendo tablas de la base de datos..."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1349
+msgid "Impossible to create"
+msgstr "Imposible de crear"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1400
+msgid "Getting contents of table "
+msgstr "Obteniendo los contenidos de la tabla"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1512
+msgid "Your database has been saved as"
+msgstr "Tu base de datos ha sido salvada como"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1525
+msgid "Error while trying to extract database data"
+msgstr "Error mientras se probaba a extraer datos de la base de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1532
+msgid "using the following command"
+msgstr "usando el siguiente mando"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1542
+msgid "extracting data with queries"
+msgstr "extrayendo datos con consultas"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1617
+msgid "The restore configuration file was successfully created."
+msgstr "El archivo de configuracion restaurado fue creado con exito."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1625
+msgid "Unable to create the restore configuration file, it will NOT be possible to use the myEASYrestore tool with this data set."
+msgstr "Incapaz de crear la configuracion de la carpeta restaurada, no sera posible la herramienta myEASYrestore con este conjunto de datos."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1629
+msgid "However you will be able to manually restore the data set."
+msgstr "Sin embargo, seras capaz de restaurar el conjunto de datos manualmente."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1683
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1760
+msgid "Your database has been added to"
+msgstr "Tu base de datos a sido anadida a"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1690
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1834
+msgid "The uncompressed MySQL backup file has been removed."
+msgstr "El archivo no comprimido de seguridad MySQL ha sido removido"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1704
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1776
+msgid "Saving your WordPress installation..."
+msgstr "Salvando tu instalacion de WordPress.."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1717
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1781
+msgid "Your WordPress installation has been added to"
+msgstr "Tu instalacion de WordPress ha sido anadida a"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1798
+msgid "Your backup data set was successfully compressed."
+msgstr "Tu conjunto de datos de tu copia de seguridad fue comprimido con exito."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1802
+msgid "The compressed file size is"
+msgstr "El tamano del archivo comprimido es"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1810
+msgid "Error when trying to compress your backup"
+msgstr "Error mientras se intentava de comprimir tu copia de seguridad"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1819
+msgid "While trying to create the file"
+msgstr "Mientras trataba de crear la carpeta"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1841
+msgid "The restore configuration file has been removed."
+msgstr "El archivo de configuracion restaurado ha sido removido."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1851
+msgid "Click to download"
+msgstr "Pulsa para descargar"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1882
+msgid "Something went wrong!"
+msgstr "Algo salio mal!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1884
+msgid "Please open the plugin settings page then"
+msgstr "Por favor, abre la pagina de configuracion del plugin y luego"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1886
+msgid "enable the show debug option"
+msgstr "abilita la opcion de mostrar el debug"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1887
+msgid "disable the prodution server option"
+msgstr "deshabilitar la opcion de produccion del servidor"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1888
+msgid "save the options"
+msgstr "salva las opciones"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1889
+msgid "copy the information shown in the \"myEASYbackup debug info\" box"
+msgstr "copia la informacion que se muestra en la caja \"myEASYbackup debug info\""
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1890
+msgid "paste and send the information to"
+msgstr "pega y envia la informacion a"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1894
+msgid "The author will get in touch if he needs further info to be able to fix the problem."
+msgstr "ELl autor te contactara si necesita mas informacion para poder resolver el problema"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1895
+msgid "Thank you!"
+msgstr "Gracias!!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1917
+msgid "Camaleo's plugins page at WordPress.org"
+msgstr "Pagina de plugins de Camaleo en WordPress.org"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/myeasybackup.php:1919
+msgid "Camaleo's plugins official site"
+msgstr "Sitio oficial de plugins de Camaleo"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:88
+msgid "Options saved!"
+msgstr "Opciones salvadas!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:89
+msgid "This page will be reloaded in a while..."
+msgstr "Esta pagina sera recargada en un momento...."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:144
+msgid "If you have donated for this plugin, please enter the donation code"
+msgstr "Si has hecho una donacion para este plugin, por favor escribe el codigo de donacion"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:145
+msgid "you received by email to hide the donation messages:"
+msgstr "que recibiste via email para esconder los mensajes de donacion:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:164
+msgid "Check this to show debug code:"
+msgstr "Marca esta para mostrar el codigo debug:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:166
+msgid "Note: debug code is shown on this page, after you enable this option click on the Update Options button and let the plugin reload the page to see the debug information."
+msgstr "Nota: el codigo de depurar se muestra en esta pagina, después de que hayas activado esta opcion, haz click en el boton Actualizar Opciones y deja que el plugin recargue la pagina para ver la informacion de depuracion."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:183
+msgid "Check if this is a production server:"
+msgstr "Marca si este es un servidor de produccion:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:185
+msgid "Note: on production servers, for security reasons, errors are never shown on the screen but written in a log file."
+msgstr "Nota: en servidores de produccion, por razones de seguridad, los errores no se muestran jamas en la pantalla sino escritos en una carpeta de log."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:206
+msgid "Data set compression level:"
+msgstr "Nivel de compresion al configurar datos:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:208
+msgid "Note: used only when the \"Use PHP code...\" option is not enabled &mdash see below."
+msgstr "Nota: usado solo cuando la opcion \"Usar codigo PHP..\" no esta activada &mdash; mira abajo."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:239
+msgid "Minimal compression, faster execution speed"
+msgstr "Compresion minima, velocidad de ejecucion mas veloz"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:249
+msgid "Default compression"
+msgstr "Compresion determinada"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:255
+msgid "Maximum compression, slower execution speed"
+msgstr "Maxima compresion, velocidad de compresion mas lenta"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:267
+msgid "Use PHP code rather than system() commands:"
+msgstr "Usa el codigo PHP en lugar del comando de sistemas ()"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:271
+msgid "Note: system() commands are enabled on this server, for better performances you may like to disable this feature."
+msgstr "Nota: los comandos sistema () estan activados en este servidor, para obtener una mejor ejecucion querras desactivar esta caracteristica."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:275
+msgid "Note: system() commands are NOT enabled on this server, you must enable this feature to be able to backup your data."
+msgstr "Nota: los comandos sistema() NO estan activados en este servidor, debes activar esta caracteristica para ser capaz de tener una copia de seguridad de tus datos."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:293
+msgid "Settings about the FTP server where to send the data set."
+msgstr "Configuracion acerca del servidor FTP donde enviar el conjunto de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:295
+msgid "Note: for security reasons the password is not saved in the options database."
+msgstr "Nota: por razones de seguridad la clave no esta salvada en las opciones de la base de datos"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:306
+msgid "FTP server name:"
+msgstr "Nombre del server FTP:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:319
+msgid "FTP user name:"
+msgstr "Nombre del usuario FTP:"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:352
+msgid "Where do you like to save your data sets (the backup .zip files)?"
+msgstr "Donde te gustaria salvar los conjuntos de datos (carpetas zip. de copia de seguridad)?"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:356
+msgid "Note: only the writable folders are shown, if you have created a folder for this purpose be sure to give at least 775 permissions (write enable on non-Linux servers)."
+msgstr "Nota: se muestran solo las carpetas que se pueden escribir, si has creado una carpeta con este proposito, asegurate de darle al menos 755 permisos (permite escribir en servidores no-Linux)"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:418
+msgid "WARNING!"
+msgstr "ADVERTENCIA!"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:422
+msgid "If you set a folder below the &ldquo;www&rdquo;, the &ldquo;public_html&rdquo; or the &ldquo;public_ftp&rdquo; folder, your backup data WILL BE EXPOSED to the public: anyone knowing the file name and this folder name WILL BE ABLE TO DOWNLOAD IT simply by using a browser."
+msgstr "Si has puesto una carpeta debajo &ldquo;www&rdquo; el &ldquo; public_html&rdquo; o el &ldquo;public_ftp&rdquo; los datos de tu copia de seguridad SERAN EXPUESTOS al publico: cualquiera que sepa el  nombre de la carpeta y el nombre de esta carpeta, SERA CAPAZ DE DESCARGARLO simplemente usando un browser."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:423
+msgid "The ability to save to a public folder was introduced for the users running their site on a hosting that has enabled the &ldquo;open_basedir&rdquo; restriction."
+msgstr "La capacidad de salvar en una carpeta publica fue por los usuarios recorriendo su sitio en un hosting que ha habilitado la restriccion &ldquo;open_basedir&rdquo;"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:424
+msgid "With the &ldquo;open_basedir&rdquo; restriction active the plugin is NOT able to read and write outside the path its running &mdash; and that MUST be public otherwise you are not able to use it."
+msgstr "Con la restriccion &ldquo;open_basedir&rdquo; activa, el plugin NO es capaz de leer y escribir fuera de la trayectoria que esta recorriendo &mdash; y DEBE ser publica, sino no seras capaz de usarla."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/meb_settings.php:425
+msgid "Be aware then that, when you set a public folder, you are WARMLY advised TO SAVE EACH DATA SET AS SOON AS ITS CREATED and then REMOVE IT IMMEDIATELY AFTER: man advised..."
+msgstr "Recuerda que cuando armas una carpeta publica, estas CORDIALMENTE aconsejado de SALVAR CADA CONJUNTO DE DATOS TAN PRONTO COMO SEA CREADO y luego QUITARLO INMEDIATAMENTE DESPUES: soldado avisado......."
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/inc/myDEBUG.php:80
+msgid "None"
+msgstr "Ninguno"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/inc/myDEBUG.php:83
+msgid "Off"
+msgstr "Apagado"
+
+#: /uuu/wordpress-2.9.1/wp-content/plugins/myeasybackup/inc/myDEBUG.php:87
+msgid "On"
+msgstr "Encendido"
+
+#~ msgid "The full path of the new data set will be"
+#~ msgstr "El trayecto completo del nuevo conjunto de datos sera"
+#~ msgid "Donation"
+#~ msgstr "Donacion"
+#~ msgid "myEASYbackup was created to make your life easier."
+#~ msgstr "myEASYbackup fue creado para hacer tu vida mas facil."
+#~ msgid ""
+#~ "If you find it useful please make a donation, even a small amount, you "
+#~ "will recognize my work and encourage me to go on with the development and "
+#~ "support of this and all my other plugins!"
+#~ msgstr ""
+#~ "Si piensas que es util, por favor haz una donacion, aun con la mas minima "
+#~ "cantidad, reconoceras mi trabajo y me animaras a continuar con el "
+#~ "desarrollo y el apoyo a este y todos mos otros plugins!"
+#~ msgid "Thank you so much!"
+#~ msgstr "Muchas gracias!!"
+

@@ -1,0 +1,110 @@
+/**
+ * myeasywp.com
+ * settings
+ * 8 January 2011
+ */
+div.light, div.med, div.dark {
+	margin-top:8px;
+	width:100%;
+	background:#eaeaea;
+	border:1px solid #bfbfbf;
+	-moz-border-radius:6px;border-radius:6px;
+}
+div.med {
+	background:#bfbfbf;
+	border:1px solid #9f9f9f;
+}
+div.dark {
+	background:#9f9f9f;
+	border:1px solid #7f7f7f;
+}
+
+div.warning,
+div.ok {
+	padding:8px;
+	margin:18px 0px 10px 10px;
+	-moz-border-radius:6px;border-radius:6px;
+	width:auto;
+}
+
+div.warning {
+	background-color:orange;
+	border:1px solid #d08c26;
+}
+
+div.ok {
+	background-color:#B3EFB5;
+	border:1px solid #8FBF90;
+}
+
+div.medium {
+	float:left;
+	width:100%;
+	margin-bottom:12px;
+	padding:8px;
+	background:#bfbfbf;
+	border:1px solid #9f9f9f;
+	-moz-border-radius:6px;border-radius:6px;
+}
+	div.left {
+		float:left;
+		width:30%;
+		padding:8px;
+	}
+	div.right {
+		float:left;
+		width:65%;
+		padding:8px 0 0 1%;
+	}
+
+div.button-separator {
+	width:100%;
+	margin:4px 0 0 0;
+	padding:4px 0 0 0;
+	border-top:0px solid #eaeaea;
+	text-align:right;
+}
+
+div.optionsGroup {
+	background:url(http://c0007523.cdn2.cloudfiles.rackspacecloud.com/menu-bits.gif?ver=20111113) repeat-x #dfdfdf;
+	height:15px;
+	margin:8px 0;padding:8px;
+	-moz-border-radius:6px;border-radius:6px;
+	border:1px solid #dfdfdf;
+}
+	div.optionsGroup-title {
+		float:left;
+		font-weight:bold;
+	}
+	div.optionsGroup-toggler-open,
+	div.optionsGroup-toggler-close {
+		float:right;
+		width:22px;height:22px;
+		cursor:pointer;
+		background-position:2px -3px;
+	}
+	div.optionsGroup-toggler-open {
+		background:url(http://c0007523.cdn2.cloudfiles.rackspacecloud.com/toggler.png?ver=20111113) no-repeat 0px -3px;
+	}
+	div.optionsGroup-toggler-open:hover {
+		background:url(http://c0007523.cdn2.cloudfiles.rackspacecloud.com/toggler.png?ver=20111113) no-repeat -21px -3px;
+	}
+	div.optionsGroup-toggler-close {
+		background:url(http://c0007523.cdn2.cloudfiles.rackspacecloud.com/toggler.png?ver=20111113) no-repeat 0px -25px;
+	}
+	div.optionsGroup-toggler-close:hover {
+		background:url(http://c0007523.cdn2.cloudfiles.rackspacecloud.com/toggler.png?ver=20111113) no-repeat -21px -25px;
+	}
+	div.optionsGroup-contents {
+		background:#ffffff;
+		-moz-border-radius:6px;border-radius:6px;
+		border:1px solid #bfbfbf;
+		/*border-top:0px;*/
+		padding:0px 8px 8px 6px;
+		margin-top:-9px;
+	}
+
+/**
+ * mailchimp
+ */
+#mc-response { color:red;font-style:italic;padding:.4em; }
